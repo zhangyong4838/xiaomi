@@ -30,3 +30,11 @@ function compose(...funcs) {
   }
   return funcs.reduce((a, b) => (...args) => a(b(...args)));
 }
+// 柯里化函数：利用闭包原理，把接收多个参数的函数变成接收单一参数的函数，并返回余下函数的参数而且返回函数的新结果
+// 好处是：可以实现数据的缓存
+function carry(y){
+  return function(x){
+    return x + y
+  }
+}
+carry(2)(1)//3

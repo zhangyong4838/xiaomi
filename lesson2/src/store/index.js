@@ -1,5 +1,5 @@
-// import {createStore, applyMiddleware} from "redux";
-import {createStore, applyMiddleware} from "../kredux/";
+// import {createStore, applyMiddleware,combineReducers} from "redux";
+import {createStore, applyMiddleware,combineReducers} from "../kredux/";
 // import thunk from "redux-thunk";
 // import logger from "redux-logger";
 // import promise from "redux-promise";
@@ -22,8 +22,21 @@ function countReducer(state = 0, action) {
   }
 }
 
+function countReducer2(state = {num:0}, {type,payload}) {
+  switch (type) {
+    case "ADD2":
+      return {...state,num:state.num + payload}
+    default:
+      return state;
+  }
+}
+
 const store = createStore(
-  countReducer,
+  // countReducer,
+  combineReducers({
+    count:countReducer,
+    count2:countReducer2
+  }),
   applyMiddleware(thunk, logger, promise)
 );
 
@@ -63,7 +76,11 @@ function promise({dispatch}) {
     }
 
     return isPromise(action.payload)
-      ? action.payload.then(res => dispatch({...action, payload: res}))
-      : next(action);
+      ? action.payload
+        .then(res => dispatch({...action, payload: res})) 
+        .catch(error =>{dispatch({...action,payload:error,error:true})
+          return Promise.reject(error)  
+        })
+      : next(action)
   };
 }
