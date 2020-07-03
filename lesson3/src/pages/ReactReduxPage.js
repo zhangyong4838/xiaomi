@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
-export default class ReactReduxPage extends Component {
+
+@connect()
+class ReactReduxPage extends Component {
     render() {
+        console.log('props',this.props);
         return (
             <div>
                 <h3>ReactReduxPage</h3>
@@ -9,3 +13,4 @@ export default class ReactReduxPage extends Component {
         )
     }
 }
+export default connect() (ReactReduxPage);
