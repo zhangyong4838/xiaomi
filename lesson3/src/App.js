@@ -1,14 +1,16 @@
-import React from 'react';
-// import HooksPage from './pages/HooksPage';
-import ReactReduxPage from './pages/ReactReduxPage'
+import React, {useState} from "react";
+// import ReactReduxPage from "./pages/ReactReduxPage";
+import ReactReduxHookPage from "./pages/ReactReduxHookPage";
 
-function App() {
+export default function App(props) {
+  const [state, setState] = useState(1);
   return (
-    <div className="App">
-      {/*<HooksPage/>*/}
-      <ReactReduxPage/>
+    <div>
+      {/* <button onClick={() => setState(state + 1)}>add : {state}</button> */}
+      {/* <ReactReduxPage state={state} /> */}
+      {/* <HooksPage /> */}
+
+      <ReactReduxHookPage />
     </div>
   );
 }
-
-export default App;
