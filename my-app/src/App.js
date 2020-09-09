@@ -24,3 +24,8 @@ function App() {
 }
 
 export default App;
+// 安装：npx create-react-app 项目名称
+// cd 项目名称
+// 提交git 
+// 暴露配置项：npm run eject
+// 启动: npm start
